@@ -22,7 +22,7 @@ hook.onAny(function (data) {
 });
 */
 
-hook.on('fromServer', function (data) {
+hook.on('*::fromServer', function (data) {
   console.log('client received ' + this.event +
     ' event with data ' + data);
 });
