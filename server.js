@@ -8,16 +8,14 @@ var server = new Webserver({
   webroot: './public'
 });
 
-server.on('hook::ready', function () {
-  console.log('listening on port ' + server.port);
+server.on('hook::ready', function (e, cb) {
+  console.log('connected ' + server.port);
 });
 
-server.on('*::fromBrowser', function (data, cb) {
-  console.log('server received ' + this.event +
-    ' event with data ' + data);
+server.on('*::fromBrowser', function (data) {
+  console.log('server received ' + this.event +' event with data ' + data);
   data = 'date on server is ' + new Date();
-  server.emit('fromServer', data);
-  cb(null, 'fromCallback');
+  server.emit(new Date()+'::fromServer', arguments);
 });
 
 server.listen();
