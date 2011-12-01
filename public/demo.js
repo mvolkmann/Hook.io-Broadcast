@@ -22,15 +22,14 @@ hook.onAny(function (data) {
 });
 */
 
-hook.on('*::fromServer', function (data) {
-  console.log('client received ' + this.event +
-    ' event with data ' + data);
+hook.on('*::fromServer', function () {
+  console.log('client received ' + this.event )//+' event with data ' + data);
 });
 
 window.onload = function () {
   var button = document.getElementById('send');
   button.onclick = function (event) {
     var data = 'date on client is ' + new Date();
-    hook.emit('fromBrowser', data);
+    hook.emit(hookName+'::fromBrowser', data);
   };
 };
